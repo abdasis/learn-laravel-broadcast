@@ -12,10 +12,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
+Route::get('/', function (){
     return view('welcome');
 });
+Route::group(['prefix' => 'users'], function(){
+    Route::get('/', \App\Http\Livewire\Users\Index::class)->name('users.index');
+    Route::get('create', \App\Http\Livewire\Users\Create::class)->name('users.create');
+});
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
